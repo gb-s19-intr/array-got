@@ -30,16 +30,34 @@ const formatCharacterToHtml = (char) => {
 const $favChar = document.getElementById(`favChar`);
 
 
-// Create a variable to hold which character I want
 
-let i = 0;
-$favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-i++;
-$favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-i++;
-$favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-i++;
-$favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+// Initializing a counter (only need to do this once)
+// let i = 0;
+
+// if (i < allCharacters.length) {
+//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+//   i += 1;
+// }
+
+// if (i < allCharacters.length) {
+//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+//   i += 1;
+// }
+
+// if (i < allCharacters.length) {
+//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+//   i += 1;
+// }
+
+// if (i < allCharacters.length) {
+//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+//   i += 1;
+// }
+
+
+for ( let i = 0; i < allCharacters.length; i++ ) {
+  $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+}
 
 
 
