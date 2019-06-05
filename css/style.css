@@ -3,3 +3,8 @@
   color: red;
   vertical-align: middle;
 }
+.alive {
+  font-size: 0.5em;
+  color: greenyellow;
+  vertical-align: middle;
+}

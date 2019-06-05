@@ -1,19 +1,15 @@
-// Combine rows and columns... we get a TABLE!
-const allCharacters = [
-  { name: `Tyrian`,  house: `Lannister`,  actor: `Peter Dinklage`,      status: `dead` },  // 0
-  { name: `Sansa`,   house: `Stark`,      actor: `Sophie Turner`,       status: `alive` },  // 1
-  { name: `Bronn`,   house: `Blackwater`, actor: `Jerome Flynn`,        status: `alive` },  // 2
-  { name: `Brianne`, house: `Tarth`,      actor: `Gwendoline Christie`, status: `alive` },  // 3
-];
-
 // Takes: "char" (Object) holding character properties
 // Return: HTML "<li>" (String) of that charcters profile
-const formatCharacterToHtml = (char) => {
+const getCharacterAsHtmlString = (char) => {
 
-  let dead = ``;
+  // Assume the character is alive
+  // let dead = ` <span class="alive">Totally alive</span>`;
+  let dead = ` <span class="alive">Totally alive</span>`;
+
   if (char.status == `dead`) {
-    dead = `<span class="dead"> Dead</span>`;
+    dead = ` <span class="dead">Dead</span>`;
   }
+
 
   return `
     <li>
@@ -26,40 +22,28 @@ const formatCharacterToHtml = (char) => {
 }
 
 
-// Store the location of the list <ol>
-const $favChar = document.getElementById(`favChar`);
+const printCharactersToList = () => {
+
+  // Store the location of the list <ol>
+  const $favChar = document.getElementById(`favChar`);
+
+  // Clear the list of characters every time I ask to print (in case I call it multiple times)
+  $favChar.innerHTML = ``;
+
+  for ( let i = 0; i < allCharacters.length; i++ ) {
+    $favChar.innerHTML += getCharacterAsHtmlString( allCharacters[i] );
+  }
 
 
 
-// Initializing a counter (only need to do this once)
-// let i = 0;
-
-// if (i < allCharacters.length) {
-//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-//   i += 1;
-// }
-
-// if (i < allCharacters.length) {
-//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-//   i += 1;
-// }
-
-// if (i < allCharacters.length) {
-//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-//   i += 1;
-// }
-
-// if (i < allCharacters.length) {
-//   $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
-//   i += 1;
-// }
-
-
-for ( let i = 0; i < allCharacters.length; i++ ) {
-  $favChar.innerHTML += formatCharacterToHtml( allCharacters[i] );
+  // If there are no characters to print yet, return false
+  if ( allCharacters.length == 0 ) {
+    return false;
+  }
+  // If characters were printed as expected, return true
+  return true;
 }
 
 
-
-      
-
+// Start the application:
+printCharactersToList();
