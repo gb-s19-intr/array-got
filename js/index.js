@@ -22,7 +22,13 @@ const getCharacterAsHtmlString = (char) => {
 }
 
 
-const printCharactersToList = () => {
+const printCharactersToList = (characters) => {
+
+  // If there are no characters to print yet, return false
+  if ( characters.length == 0 ) {
+    return false;
+  }
+
 
   // Store the location of the list <ol>
   const $favChar = document.getElementById(`favChar`);
@@ -30,20 +36,53 @@ const printCharactersToList = () => {
   // Clear the list of characters every time I ask to print (in case I call it multiple times)
   $favChar.innerHTML = ``;
 
-  for ( let i = 0; i < allCharacters.length; i++ ) {
-    $favChar.innerHTML += getCharacterAsHtmlString( allCharacters[i] );
-  }
+  characters.forEach( char => {
+    $favChar.innerHTML += getCharacterAsHtmlString( char );
+  })
 
 
-
-  // If there are no characters to print yet, return false
-  if ( allCharacters.length == 0 ) {
-    return false;
-  }
-  // If characters were printed as expected, return true
+  // Assume characters were printed as expected, return true
   return true;
 }
 
 
+
+///////////// FILTER BY STATUS /////////////
+// Check if the character's status == `dead`, store the ones that match in a NEW Array and reprint
+const getDeadCharacters = () => {
+
+  const justDead = allCharacters.filter( char => char.status == `dead` )
+  printCharactersToList(justDead);
+}
+document.getElementById(`filter-dead`).addEventListener(`click`, getDeadCharacters); // Add a listener to the `Dead` button
+
+
+
+///////////// FILTER BY HEIGHT /////////////
+// Check if the character's height > 170, store the ones that match in a NEW Array and reprint
+const getTallCharacters = () => {
+
+  const justTall = allCharacters.filter( char => char.height > 170 )
+  printCharactersToList(justTall);
+}
+document.getElementById(`filter-tall`).addEventListener(`click`, getTallCharacters); // Add a listener to the `Tall` button
+
+
+
+///////////// FILTER BY HOUSE /////////////
+// Check if the character's house == `Stark`, store the ones that match in a NEW Array and reprint
+const getStarkCharacters = () => {
+
+  const justStarks = allCharacters.filter( char => char.house == `Stark` )
+  printCharactersToList(justStarks);
+}
+
+document.getElementById(`filter-stark`).addEventListener(`click`, getStarkCharacters); // Add a listener to the `Stark` button
+
+
+
+
+
+
 // Start the application:
-printCharactersToList();
+printCharactersToList(allCharacters);
